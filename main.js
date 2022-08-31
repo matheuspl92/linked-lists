@@ -44,6 +44,10 @@ const LinkedListFactory = () => {
         if (!node.getLink()) return null;
         return _find(value, index + 1, node.getLink());
     };
+    const _toString = (node = headNode) => {
+        if (!node.getLink()) return `( ${node.getData()} ) -> null`;
+        return `( ${node.getData()} ) -> `.concat(_toString(node.getLink()));
+    };
 
     return {
         append: (value) => {
@@ -82,6 +86,7 @@ const LinkedListFactory = () => {
         },
         contains: _contains,
         find: _find,
+        toString: _toString,
     }
 
 };
@@ -93,5 +98,5 @@ newList.append('DATA3');
 newList.append('I AM LAST');
 newList.prepend('PREPEND1');
 newList.prepend('I AM FIRST');
-console.log(newList.readAllData());
+console.log(newList.toString());
 
