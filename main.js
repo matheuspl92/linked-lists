@@ -90,9 +90,9 @@ const LinkedListFactory = () => {
         toString: _toString,
         insertAt: (value, index) => {
             if (index === 0) {
-                console.log('insertAt method ERROR: USE PREPEND INSTEAD');
+                console.log('insertAt method ERROR: trying to insert at the head, USE PREPEND INSTEAD');
             } else if (index >= _size()) {
-                console.log('insertAt method ERROR: USE APPEND INSTEAD');
+                console.log('insertAt method ERROR: trying to insert at the tail, USE APPEND INSTEAD');
             } else {
                 const newNode = NodeFactory();
                 newNode.setData(value);
@@ -100,6 +100,15 @@ const LinkedListFactory = () => {
                 _at(index - 1).setLink(newNode);
             }
         },
+        removeAt: (index) => {
+            if (index === 0) {
+                headNode = headNode.getLink();
+            } else if (index >= _size() - 1) {
+                console.log('removeAt method ERROR: trying to remove last node, USE POP INSTEAD');
+            } else {
+                _at(index - 1).setLink(_at(index + 1));
+            }
+        }
     }
 
 };
