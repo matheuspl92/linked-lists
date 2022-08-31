@@ -32,6 +32,12 @@ const LinkedListFactory = () => {
         if (!node.getLink()) return 'INVALID INDEX';
         return _at(index - 1, node.getLink());
     };
+    const _contains = (value, node = headNode) => {
+        if (!node) return 'EMPTY LIST';
+        if (node.getData() === value) return true;
+        if (!node.getLink()) return false;
+        return _contains(value, node.getLink());
+    };
 
     return {
         append: (value) => {
@@ -68,6 +74,7 @@ const LinkedListFactory = () => {
                 _at(_size() - 2).setLink(null);
             }
         },
+        contains: _contains,
     }
 
 };
