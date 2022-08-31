@@ -16,6 +16,18 @@ const LinkedListFactory = () => {
     const _transverseToEnd = (node = headNode) => {
         return (node.getLink()) ? _transverseToEnd(node.getLink()) : node;
     };
+    const _prepend = (value) => {
+        if (headNode === null) {
+            headNode = NodeFactory();
+            headNode.setData(value);
+            console.log('PREPENDED');
+        } else {
+            const newNode = NodeFactory();
+            newNode.setData(value);
+            newNode.setLink(headNode);
+            headNode = newNode;
+        }
+    }
     const _readAllData = (node = headNode) => {
         if (!node) return 'EMPTY LIST';
         console.log(node.getData());
@@ -60,18 +72,7 @@ const LinkedListFactory = () => {
                 _transverseToEnd().setLink(newNode);
             }
         },
-        prepend: (value) => {
-            if (headNode === null) {
-                headNode = NodeFactory();
-                headNode.setData(value);
-                console.log('PREPENDED');
-            } else {
-                const newNode = NodeFactory();
-                newNode.setData(value);
-                newNode.setLink(headNode);
-                headNode = newNode;
-            }
-        },
+        prepend: _prepend,
         readAllData: _readAllData,
         size: _size,
         head: () => { return headNode },
@@ -87,6 +88,18 @@ const LinkedListFactory = () => {
         contains: _contains,
         find: _find,
         toString: _toString,
+        insertAt: (value, index) => {
+            if (index === 0) {
+                console.log('insertAt method ERROR: USE PREPEND INSTEAD');
+            } else if (index >= _size()) {
+                console.log('insertAt method ERROR: USE APPEND INSTEAD');
+            } else {
+                const newNode = NodeFactory();
+                newNode.setData(value);
+                newNode.setLink(_at(index));
+                _at(index - 1).setLink(newNode);
+            }
+        },
     }
 
 };
