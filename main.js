@@ -38,6 +38,12 @@ const LinkedListFactory = () => {
         if (!node.getLink()) return false;
         return _contains(value, node.getLink());
     };
+    const _find = (value, index = 0, node = headNode) => {
+        if (!node) return 'EMPTY LIST';
+        if (node.getData() === value) return index;
+        if (!node.getLink()) return null;
+        return _find(value, index + 1, node.getLink());
+    };
 
     return {
         append: (value) => {
@@ -75,6 +81,7 @@ const LinkedListFactory = () => {
             }
         },
         contains: _contains,
+        find: _find,
     }
 
 };
