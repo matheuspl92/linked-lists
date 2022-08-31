@@ -58,11 +58,18 @@ const LinkedListFactory = () => {
         },
         readAllData: _readAllData,
         size: _size,
-        head: () => {return headNode},
+        head: () => { return headNode },
         tail: _transverseToEnd,
         at: _at,
+        pop: () => {
+            if (_size() === 1) {
+                headNode = null;
+            } else {
+                _at(_size() - 2).setLink(null);
+            }
+        },
     }
-    
+
 };
 
 let newList = LinkedListFactory();
@@ -73,3 +80,4 @@ newList.append('I AM LAST');
 newList.prepend('PREPEND1');
 newList.prepend('I AM FIRST');
 console.log(newList.readAllData());
+
